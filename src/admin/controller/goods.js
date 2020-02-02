@@ -9,14 +9,24 @@ module.exports = class extends Base {
     const page = this.get('page') || 1;
     const size = this.get('size') || 10;
     const name = this.get('name') || '';
-    const data = await this.model('goods').alias('g').field(['g.id', 'g.name', 'g.goods_brief', 'g.retail_price', 'g.goods_number', 'g.is_delete', 'c.name AS c_name']).join({
-      table: 'category',
-      join: 'left',
-      as: 'c',
-      on: ['category_id', 'id']
-    }).where({'g.name': ['like', `%${name}%`]}).order(['g.id DESC']).page(page, size).countSelect();
+    const cateId = this.get('cateid') || '';
+    let data = null;
+    if (cateId === 'all') {
+      data = await this.model('goods').alias('g').field(['g.id', 'g.name', 'g.goods_brief', 'g.retail_price', 'g.goods_number', 'g.is_delete', 'c.name AS c_name', 'g.category_id']).join({
+        table: 'category',
+        join: 'left',
+        as: 'c',
+        on: ['category_id', 'id']
+      }).where({'g.name': ['like', `%${name}%`]}).order(['g.id DESC']).page(page, size).countSelect();
+    } else {
+      data = await this.model('goods').alias('g').field(['g.id', 'g.name', 'g.goods_brief', 'g.retail_price', 'g.goods_number', 'g.is_delete', 'c.name AS c_name', 'g.category_id']).join({
+        table: 'category',
+        join: 'left',
+        as: 'c',
+        on: ['category_id', 'id']
+      }).where({'g.name': ['like', `%${name}%`], 'g.category_id': `${cateId}`}).order(['g.id DESC']).page(page, size).countSelect();
+    }
     // const data = await model.where({name: ['like', `%${name}%`]}).order(['id DESC']).page(page, size).countSelect();
-
     return this.success(data);
   }
 
@@ -27,7 +37,13 @@ module.exports = class extends Base {
 
     return this.success(data);
   }
+  async delAction() {
+    const id = this.post('id');
+    await this.model('goods').where({id: id}).limit(1).delete();
+    // TODO 删除图片
 
+    return this.success();
+  }
   async storeAction() {
     if (!this.isPost) {
       return false;
