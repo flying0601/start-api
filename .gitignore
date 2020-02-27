@@ -22,7 +22,8 @@ coverage/
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules/
-
+.vscode
+deploy.yaml
 # IDE config
 .idea
 
@@ -35,3 +36,5 @@ app/
 
 config.development.js
 adapter.development.js
+.vscode/
+/.vscode/settings.json
