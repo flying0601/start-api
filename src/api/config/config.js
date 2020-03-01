@@ -10,7 +10,9 @@ module.exports = {
     'goods',
     'brand',
     'search',
-    'region'
+    'region',
+    'foods',
+    'wxweb'
   ],
 
   // 可以公开访问的Action
@@ -24,7 +26,6 @@ module.exports = {
     'cart/update',
     'cart/delete',
     'cart/goodscount',
-    'pay/notify',
-    'foods/foodList'
+    'pay/notify'
   ]
 };

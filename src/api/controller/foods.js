@@ -20,4 +20,10 @@ module.exports = class extends Base {
 
     return this.success({brand: data});
   }
+  async getconfigAction() {
+    const link = this.get('url') || this.post('url');
+    const WeixinConfig = this.service('wxsdk', 'api');
+    const data = await WeixinConfig.getConfig(link);
+    return this.success(data);
+  }
 };

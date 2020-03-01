@@ -13,5 +13,9 @@ module.exports = {
     appid: '', // 对应快递鸟用户后台 用户ID
     appkey: '', // 对应快递鸟用户后台 API key
     request_url: 'http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx'
+  },
+  wxWeb: {
+    appid: 'wx124f5edb96507289', // 公众号appid
+    secret: '547b88d7f417c3124d06fdc1000593ce'// 公众号密匙
   }
 };

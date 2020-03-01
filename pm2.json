@@ -1,6 +1,6 @@
 {
   "apps": [{
-    "name": "start",
+    "name": "start-api",
     "script": "production.js",
     "cwd": "/var/www/start-api",
     "exec_mode": "fork",
